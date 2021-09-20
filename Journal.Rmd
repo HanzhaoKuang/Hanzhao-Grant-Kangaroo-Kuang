@@ -82,7 +82,7 @@ Answer: The dataset contains the statistic of the violent crime rate of 3 differ
 Draw a histogram of `Murder` with proper labels and title.
 
 ```{r}
-hist(dat$Murder, main="US Murder", xlab="States", ylab="Murder/100000 residents")
+hist(dat$Murder, main="US Murder", xlab="Murder/100000 residents", ylab="States")
 ```
 
 ### Problem 6
