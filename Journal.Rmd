@@ -64,7 +64,7 @@ Answer: "Assault", "Murder", "Rape", "state", and "UrbanPop".
 
 What type of variable (from the DVB chapter) is `Murder`? 
 
-Answer: Categorical variable
+Answer: Quantitative variable
 
 What R Type of variable is it?
 
