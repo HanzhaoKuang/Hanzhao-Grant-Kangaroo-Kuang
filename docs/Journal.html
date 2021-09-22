@@ -424,6 +424,7 @@ library(&#39;ggplot2&#39;)
 ggplot(dat, aes(map_id=state, fill=Murder)) + 
   geom_map(map=map_data(&quot;state&quot;)) + 
   expand_limits(x=map_data(&quot;state&quot;)$long, y=map_data(&quot;state&quot;)$lat)</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-8-1.png" width="720" /></p>
 <p>What does this code do? Explain what each line is doing.</p>
 <p>Answer: The first line construct an aesthetic mapping from the dataset “dat” with the map id being state and each state is filled with the data “Murder”.The second assign map data of variable “state” to the annotation of geom_map. The next two lines expand the plot’s limit using the data from the variable “state” for its x and y axis. <span class="math display">\[\\[2in]\]</span></p>
 </div>
