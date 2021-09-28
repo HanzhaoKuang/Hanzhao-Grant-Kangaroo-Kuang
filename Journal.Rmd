@@ -136,4 +136,145 @@ ggplot(dat, aes(map_id=state, fill=Murder)) +
 What does this code do? Explain what each line is doing.
 
 Answer: The first line construct an aesthetic mapping from the dataset "dat" with the map id being state and each state is filled with the data "Murder".The second assign map data of variable "state" to the annotation of geom_map. The next two lines expand the plot's limit using the data from the variable "state" for its x and y axis.
+
+# Assignment 2
+
+Instructions: Copy your code, paste it into a Word document, and turn it into Canvas. You can turn in a .docx or .pdf file. Show any EDA (graphical or non-graphical) you have used to come to this conclusion.
+
+### Problem 1: Load data
+
+Set your working directory to the folder where you downloaded the data.
+
+Answer:Select dat.nsduh.small.1.csv from the file on the bottomright and import the dataset.
+
+Read the data
+```{r}
+library(readr)
+dat<- read_csv("dat.nsduh.small.1.csv")
+```
+
+What are the dimensions of the dataset?
+```{r}
+names(dat) 
+```
+
+Answer:The dataset has two dimensions. The first dimension is the 171 observations, and the second dimension is the 7 variables "mjage", "cigage", "iralcage", "age2", "sexatract" "speakengl" "irsex".
+
+###Problem 2: Variables
+Describe the variables in the dataset.
+```{r}
+summary(dat)
+```
+
+Answer: The variablesin the dataset all all numeric variables in R. mjage, cigage, iralcage, and age2 are quantitative variables, and sexatract, speakengl, and irsex are categorical variables.
+
+What is this dataset about? Who collected the data, what kind of sample is it, and what was the purpose of generating the data?
+
+Answer:This dataset is about the national drug use of United States in 2019. The data is collected by NSDUH which directed by Substance Abuse and Mental Health Services Administration of United States. The purpose of generating these data is to monitor the usage of drugs and support prevention and treatment programs.
+
+### Problem 3: Age and gender
+
+What is the age distribution of the sample like? Make sure you read the codebook to know what the variable values mean.
+
+```{r}
+summary(dat$age2)
+hist(dat$age2,xlab="age", ylab="counts")
+```
+
+Answer: The ages of the survey range from 15 years old to 65 years old or older. The data is largely skewed to the left with a peak at the respondent group of 35-49 years old.
+
+Do you think this age distribution representative of the US population? Why or why  not?
+
+Answer: I don't think this age distribution is representative. First, this survey doesn't include any people whose age is younger than 12, and that doesn't represent U.S. population. Also, since this survey is used to monitor drug uses, their sampling method might not be random and thus not represetative of the U.S. population.
+
+Is the sample balanced in terms of gender? If not, are there more females or males?
+
+```{r}
+summary(dat$irsex)
+```
+
+Answer: The sampling is not balanced in term of gender. There are more males than females.
+
+Use this code to draw a stacked bar plot to view the relationship between sex and age. What can you conclude from this plot?
+
+```{r}
+tab.agesex <- table(dat$irsex, dat$age2)
+rownames(tab.agesex) <- c("Male", "Female")
+barplot(tab.agesex,
+        main = "Distribution of Age by gender",
+        xlab = "Age category", ylab = "Frequency",
+        legend.text = rownames(tab.agesex),
+        beside = FALSE) # Stacked bars (default)
+```
+
+Answer: We can conclude from the graph that in younger population, more females are in the survey than males, but in older populations, more males are in the survey tha females. Most importantly, there are roughly the same numbers of males and females in age category 15 which is the biggest category.
+
+### Problem 4: Substance use
+
+For which of the three substances included in the dataset (marijuana, alcohol, and cigarettes) do individuals tend to use the substance earlier?
+```{r}
+par(mfrow=c(3,1))
+hist(dat$mjage,xlab="age/mj", ylab="counts", xlim=c(0,50))
+hist(dat$cigage,xlab="age/cig", ylab="counts", xlim=c(0,50))
+hist(dat$iralcage,xlab="age/al", ylab="counts", xlim=c(0,50))
+```
+
+Answer: According to the data, it seems that people tend to use alcohol earlier because the youngest alcohol user is at age 5, and the mean and median of alcohol usage is the lowest among the three drugs. 
+
+### Problem 5: Sexual attraction
+
+What does the distribution of sexual attraction look like? Is this what you expected?
+
+```{r, fig.width=10}
+dat$sexatract.no.nas <- ifelse(dat$sexatract==99, NA, dat$sexatract)
+tab.sexatract <- table(dat$sexatract.no.nas)
+rownames(tab.sexatract) <- c("Only Opposite", "Mostly Opposite", "Equal","Mostly Same","Only Same","Not Sure")
+barplot(tab.sexatract,xlab="sex", ylab="counts")
+
+```
+
+Answer: The distribution of the sexual attraction is strongly skewed to the left. This is expected because sexual attraction to the same sex is still minority in the society, and people might not feel comfortable to disclose their sexual orientation if they are the minorities in the survey.
+
+What is the distribution of sexual attraction by gender?
+
+```{r, fig.width=10}
+par(mfrow=c(2,1))
+dat.onlyfemale <- dat[dat$irsex==2,]
+tab.onlyfemale <- table(dat.onlyfemale$sexatract.no.nas)
+rownames(tab.onlyfemale) <- c("Only Opposite", "Mostly Opposite", "Equal","Mostly Same","Only Same")
+barplot(tab.onlyfemale,xlab ="Sexual Attraction of Females", ylab ="counts")
+dat.onlymale <- dat[dat$irsex==1,]
+tab.onlymale <- table(dat.onlymale$sexatract.no.nas)
+rownames(tab.onlymale) <- c("Only Opposite", "Mostly Opposite","Mostly Same","Only Same","Not Sure")
+barplot(tab.onlymale,xlab="Sexual Attraction of Males", ylab="counts")
+```
+
+Answer: It is clear that for both gender the graph is strongly skewed to the right, but the for males it is more skewed than for females. That means homosexuality is minority in both cases, but there are percentage of homosexual males than females.
+
+### Problem 6: English speaking
+
+What does the distribution of English speaking look like in the sample? Is this what you might expect for a random sample of the US population?
+```{r}
+summary(dat$speakengl)
+tab.speakengl <- table(dat$speakengl)
+rownames(tab.speakengl) <- c("Very well", "Well", "Not Well")
+barplot(tab.speakengl,xlab="English Ability", ylab="counts")
+```
+
+Answer: The distribution is strongly skewed to the right with a peak at 1. This means that the majority of the participants speak English very well. Given the fact that it is in the U.S., this is what I would expect from a simple random sample of U.S. population.
+
+Are there more English speaker females or males?
+
+```{r}
+library(ggplot2)
+gender.labs <- c(`1`="Male", `2`="Female")
+ggplot(data=dat, aes(x=speakengl))+
+  geom_bar(na.rm=TRUE)+
+  facet_grid(irsex ~ ., labeller=as_labeller(gender.labs))+
+  labs(title="Distribution of English ability by gender", y="Frequency")+
+  scale_x_discrete(name ="English ability",
+                     limits=c("Very well","Well","Not well","Not at all"))
+```
+
+Answer: There are more English speaking males than females.
 $$\\[2in]$$

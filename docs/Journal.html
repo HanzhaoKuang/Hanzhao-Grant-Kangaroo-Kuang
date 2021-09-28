@@ -426,7 +426,125 @@ ggplot(dat, aes(map_id=state, fill=Murder)) +
   expand_limits(x=map_data(&quot;state&quot;)$long, y=map_data(&quot;state&quot;)$lat)</code></pre>
 <p><img src="Journal_files/figure-html/unnamed-chunk-8-1.png" width="720" /></p>
 <p>What does this code do? Explain what each line is doing.</p>
-<p>Answer: The first line construct an aesthetic mapping from the dataset “dat” with the map id being state and each state is filled with the data “Murder”.The second assign map data of variable “state” to the annotation of geom_map. The next two lines expand the plot’s limit using the data from the variable “state” for its x and y axis. <span class="math display">\[\\[2in]\]</span></p>
+<p>Answer: The first line construct an aesthetic mapping from the dataset “dat” with the map id being state and each state is filled with the data “Murder”.The second assign map data of variable “state” to the annotation of geom_map. The next two lines expand the plot’s limit using the data from the variable “state” for its x and y axis.</p>
+</div>
+</div>
+<div id="assignment-2" class="section level1">
+<h1>Assignment 2</h1>
+<p>Instructions: Copy your code, paste it into a Word document, and turn it into Canvas. You can turn in a .docx or .pdf file. Show any EDA (graphical or non-graphical) you have used to come to this conclusion.</p>
+<div id="problem-1-load-data" class="section level3">
+<h3>Problem 1: Load data</h3>
+<p>Set your working directory to the folder where you downloaded the data.</p>
+<p>Answer:Select dat.nsduh.small.1.csv from the file on the bottomright and import the dataset.</p>
+<p>Read the data</p>
+<pre class="r"><code>library(readr)
+dat&lt;- read_csv(&quot;dat.nsduh.small.1.csv&quot;)</code></pre>
+<p>What are the dimensions of the dataset?</p>
+<pre class="r"><code>names(dat) </code></pre>
+<pre><code>## [1] &quot;mjage&quot;     &quot;cigage&quot;    &quot;iralcage&quot;  &quot;age2&quot;      &quot;sexatract&quot; &quot;speakengl&quot;
+## [7] &quot;irsex&quot;</code></pre>
+<p>Answer:The dataset has two dimensions. The first dimension is the 171 observations, and the second dimension is the 7 variables “mjage”, “cigage”, “iralcage”, “age2”, “sexatract” “speakengl” “irsex”.</p>
+<p>###Problem 2: Variables Describe the variables in the dataset.</p>
+<pre class="r"><code>summary(dat)</code></pre>
+<pre><code>##      mjage           cigage         iralcage          age2      
+##  Min.   : 7.00   Min.   :10.00   Min.   : 5.00   Min.   : 4.00  
+##  1st Qu.:14.00   1st Qu.:15.00   1st Qu.:13.00   1st Qu.:13.00  
+##  Median :16.00   Median :17.00   Median :15.00   Median :15.00  
+##  Mean   :15.99   Mean   :17.65   Mean   :14.95   Mean   :13.98  
+##  3rd Qu.:17.50   3rd Qu.:19.00   3rd Qu.:17.00   3rd Qu.:15.00  
+##  Max.   :35.00   Max.   :50.00   Max.   :23.00   Max.   :17.00  
+##    sexatract       speakengl        irsex      
+##  Min.   : 1.00   Min.   :1.00   Min.   :1.000  
+##  1st Qu.: 1.00   1st Qu.:1.00   1st Qu.:1.000  
+##  Median : 1.00   Median :1.00   Median :1.000  
+##  Mean   : 3.07   Mean   :1.07   Mean   :1.468  
+##  3rd Qu.: 1.00   3rd Qu.:1.00   3rd Qu.:2.000  
+##  Max.   :99.00   Max.   :3.00   Max.   :2.000</code></pre>
+<p>Answer: The variablesin the dataset all all numeric variables in R. mjage, cigage, iralcage, and age2 are quantitative variables, and sexatract, speakengl, and irsex are categorical variables.</p>
+<p>What is this dataset about? Who collected the data, what kind of sample is it, and what was the purpose of generating the data?</p>
+<p>Answer:This dataset is about the national drug use of United States in 2019. The data is collected by NSDUH which directed by Substance Abuse and Mental Health Services Administration of United States. The purpose of generating these data is to monitor the usage of drugs and support prevention and treatment programs.</p>
+</div>
+<div id="problem-3-age-and-gender" class="section level3">
+<h3>Problem 3: Age and gender</h3>
+<p>What is the age distribution of the sample like? Make sure you read the codebook to know what the variable values mean.</p>
+<pre class="r"><code>summary(dat$age2)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    4.00   13.00   15.00   13.98   15.00   17.00</code></pre>
+<pre class="r"><code>hist(dat$age2,xlab=&quot;age&quot;, ylab=&quot;counts&quot;)</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Answer: The ages of the survey range from 15 years old to 65 years old or older. The data is largely skewed to the left with a peak at the respondent group of 35-49 years old.</p>
+<p>Do you think this age distribution representative of the US population? Why or why not?</p>
+<p>Answer: I don’t think this age distribution is representative. First, this survey doesn’t include any people whose age is younger than 12, and that doesn’t represent U.S. population. Also, since this survey is used to monitor drug uses, their sampling method might not be random and thus not represetative of the U.S. population.</p>
+<p>Is the sample balanced in terms of gender? If not, are there more females or males?</p>
+<pre class="r"><code>summary(dat$irsex)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.000   1.000   1.000   1.468   2.000   2.000</code></pre>
+<p>Answer: The sampling is not balanced in term of gender. There are more males than females.</p>
+<p>Use this code to draw a stacked bar plot to view the relationship between sex and age. What can you conclude from this plot?</p>
+<pre class="r"><code>tab.agesex &lt;- table(dat$irsex, dat$age2)
+rownames(tab.agesex) &lt;- c(&quot;Male&quot;, &quot;Female&quot;)
+barplot(tab.agesex,
+        main = &quot;Distribution of Age by gender&quot;,
+        xlab = &quot;Age category&quot;, ylab = &quot;Frequency&quot;,
+        legend.text = rownames(tab.agesex),
+        beside = FALSE) # Stacked bars (default)</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Answer: We can conclude from the graph that in younger population, more females are in the survey than males, but in older populations, more males are in the survey tha females. Most importantly, there are roughly the same numbers of males and females in age category 15 which is the biggest category.</p>
+</div>
+<div id="problem-4-substance-use" class="section level3">
+<h3>Problem 4: Substance use</h3>
+<p>For which of the three substances included in the dataset (marijuana, alcohol, and cigarettes) do individuals tend to use the substance earlier?</p>
+<pre class="r"><code>par(mfrow=c(3,1))
+hist(dat$mjage,xlab=&quot;age/mj&quot;, ylab=&quot;counts&quot;, xlim=c(0,50))
+hist(dat$cigage,xlab=&quot;age/cig&quot;, ylab=&quot;counts&quot;, xlim=c(0,50))
+hist(dat$iralcage,xlab=&quot;age/al&quot;, ylab=&quot;counts&quot;, xlim=c(0,50))</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>Answer: According to the data, it seems that people tend to use alcohol earlier because the youngest alcohol user is at age 5, and the mean and median of alcohol usage is the lowest among the three drugs.</p>
+</div>
+<div id="problem-5-sexual-attraction" class="section level3">
+<h3>Problem 5: Sexual attraction</h3>
+<p>What does the distribution of sexual attraction look like? Is this what you expected?</p>
+<pre class="r"><code>dat$sexatract.no.nas &lt;- ifelse(dat$sexatract==99, NA, dat$sexatract)
+tab.sexatract &lt;- table(dat$sexatract.no.nas)
+rownames(tab.sexatract) &lt;- c(&quot;Only Opposite&quot;, &quot;Mostly Opposite&quot;, &quot;Equal&quot;,&quot;Mostly Same&quot;,&quot;Only Same&quot;,&quot;Not Sure&quot;)
+barplot(tab.sexatract,xlab=&quot;sex&quot;, ylab=&quot;counts&quot;)</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-16-1.png" width="960" /></p>
+<p>Answer: The distribution of the sexual attraction is strongly skewed to the left. This is expected because sexual attraction to the same sex is still minority in the society, and people might not feel comfortable to disclose their sexual orientation if they are the minorities in the survey.</p>
+<p>What is the distribution of sexual attraction by gender?</p>
+<pre class="r"><code>par(mfrow=c(2,1))
+dat.onlyfemale &lt;- dat[dat$irsex==2,]
+tab.onlyfemale &lt;- table(dat.onlyfemale$sexatract.no.nas)
+rownames(tab.onlyfemale) &lt;- c(&quot;Only Opposite&quot;, &quot;Mostly Opposite&quot;, &quot;Equal&quot;,&quot;Mostly Same&quot;,&quot;Only Same&quot;)
+barplot(tab.onlyfemale,xlab =&quot;Sexual Attraction of Females&quot;, ylab =&quot;counts&quot;)
+dat.onlymale &lt;- dat[dat$irsex==1,]
+tab.onlymale &lt;- table(dat.onlymale$sexatract.no.nas)
+rownames(tab.onlymale) &lt;- c(&quot;Only Opposite&quot;, &quot;Mostly Opposite&quot;,&quot;Mostly Same&quot;,&quot;Only Same&quot;,&quot;Not Sure&quot;)
+barplot(tab.onlymale,xlab=&quot;Sexual Attraction of Males&quot;, ylab=&quot;counts&quot;)</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-17-1.png" width="960" /></p>
+<p>Answer: It is clear that for both gender the graph is strongly skewed to the right, but the for males it is more skewed than for females. That means homosexuality is minority in both cases, but there are percentage of homosexual males than females.</p>
+</div>
+<div id="problem-6-english-speaking" class="section level3">
+<h3>Problem 6: English speaking</h3>
+<p>What does the distribution of English speaking look like in the sample? Is this what you might expect for a random sample of the US population?</p>
+<pre class="r"><code>summary(dat$speakengl)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    1.00    1.00    1.00    1.07    1.00    3.00</code></pre>
+<pre class="r"><code>tab.speakengl &lt;- table(dat$speakengl)
+rownames(tab.speakengl) &lt;- c(&quot;Very well&quot;, &quot;Well&quot;, &quot;Not Well&quot;)
+barplot(tab.speakengl,xlab=&quot;English Ability&quot;, ylab=&quot;counts&quot;)</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Answer: The distribution is strongly skewed to the right with a peak at 1. This means that the majority of the participants speak English very well. Given the fact that it is in the U.S., this is what I would expect from a simple random sample of U.S. population.</p>
+<p>Are there more English speaker females or males?</p>
+<pre class="r"><code>library(ggplot2)
+gender.labs &lt;- c(`1`=&quot;Male&quot;, `2`=&quot;Female&quot;)
+ggplot(data=dat, aes(x=speakengl))+
+  geom_bar(na.rm=TRUE)+
+  facet_grid(irsex ~ ., labeller=as_labeller(gender.labs))+
+  labs(title=&quot;Distribution of English ability by gender&quot;, y=&quot;Frequency&quot;)+
+  scale_x_discrete(name =&quot;English ability&quot;,
+                     limits=c(&quot;Very well&quot;,&quot;Well&quot;,&quot;Not well&quot;,&quot;Not at all&quot;))</code></pre>
+<p><img src="Journal_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>Answer: There are more English speaking males than females. <span class="math display">\[\\[2in]\]</span></p>
 </div>
 </div>
 
