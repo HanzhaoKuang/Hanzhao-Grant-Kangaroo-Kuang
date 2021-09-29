@@ -507,7 +507,7 @@ hist(dat$iralcage,xlab=&quot;age/al&quot;, ylab=&quot;counts&quot;, xlim=c(0,50)
 <pre class="r"><code>dat$sexatract.no.nas &lt;- ifelse(dat$sexatract==99, NA, dat$sexatract)
 tab.sexatract &lt;- table(dat$sexatract.no.nas)
 rownames(tab.sexatract) &lt;- c(&quot;Only Opposite&quot;, &quot;Mostly Opposite&quot;, &quot;Equal&quot;,&quot;Mostly Same&quot;,&quot;Only Same&quot;,&quot;Not Sure&quot;)
-barplot(tab.sexatract,xlab=&quot;sex&quot;, ylab=&quot;counts&quot;)</code></pre>
+barplot(tab.sexatract,xlab=&quot;sex&quot;, ylab=&quot;counts&quot;, lengend=TRUE)</code></pre>
 <p><img src="Journal_files/figure-html/unnamed-chunk-16-1.png" width="960" /></p>
 <p>Answer: The distribution of the sexual attraction is strongly skewed to the left. This is expected because sexual attraction to the same sex is still minority in the society, and people might not feel comfortable to disclose their sexual orientation if they are the minorities in the survey.</p>
 <p>What is the distribution of sexual attraction by gender?</p>
@@ -531,7 +531,7 @@ barplot(tab.onlymale,xlab=&quot;Sexual Attraction of Males&quot;, ylab=&quot;cou
 ##    1.00    1.00    1.00    1.07    1.00    3.00</code></pre>
 <pre class="r"><code>tab.speakengl &lt;- table(dat$speakengl)
 rownames(tab.speakengl) &lt;- c(&quot;Very well&quot;, &quot;Well&quot;, &quot;Not Well&quot;)
-barplot(tab.speakengl,xlab=&quot;English Ability&quot;, ylab=&quot;counts&quot;)</code></pre>
+barplot(tab.speakengl,xlab=&quot;English Ability&quot;, ylab=&quot;counts&quot;, legend=TRUE)</code></pre>
 <p><img src="Journal_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>Answer: The distribution is strongly skewed to the right with a peak at 1. This means that the majority of the participants speak English very well. Given the fact that it is in the U.S., this is what I would expect from a simple random sample of U.S. population.</p>
 <p>Are there more English speaker females or males?</p>

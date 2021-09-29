@@ -229,7 +229,7 @@ What does the distribution of sexual attraction look like? Is this what you expe
 dat$sexatract.no.nas <- ifelse(dat$sexatract==99, NA, dat$sexatract)
 tab.sexatract <- table(dat$sexatract.no.nas)
 rownames(tab.sexatract) <- c("Only Opposite", "Mostly Opposite", "Equal","Mostly Same","Only Same","Not Sure")
-barplot(tab.sexatract,xlab="sex", ylab="counts")
+barplot(tab.sexatract,xlab="sex", ylab="counts", lengend=TRUE)
 
 ```
 
@@ -258,7 +258,7 @@ What does the distribution of English speaking look like in the sample? Is this 
 summary(dat$speakengl)
 tab.speakengl <- table(dat$speakengl)
 rownames(tab.speakengl) <- c("Very well", "Well", "Not Well")
-barplot(tab.speakengl,xlab="English Ability", ylab="counts")
+barplot(tab.speakengl,xlab="English Ability", ylab="counts", legend=TRUE)
 ```
 
 Answer: The distribution is strongly skewed to the right with a peak at 1. This means that the majority of the participants speak English very well. Given the fact that it is in the U.S., this is what I would expect from a simple random sample of U.S. population.
