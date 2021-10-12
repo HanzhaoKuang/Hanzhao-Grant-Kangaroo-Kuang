@@ -6,6 +6,4 @@ navbar:
       href: index.html
     - text: "CRIM250 Assignment"
       href: CRIM250-Assignment.html
-    - text: "Links"
-      href: Links.html
 output_dir: "docs"
