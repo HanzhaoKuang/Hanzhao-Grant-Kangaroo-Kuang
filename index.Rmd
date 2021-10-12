@@ -19,7 +19,7 @@ output: html_document
 
 # **Hanzhao(Grant/Kangaroo) Kuang**
 
-### I am Hanzhao Kuang, otherwise known as Grant or Kangaroo. I am currently an undergraduate at UPenn major in Classical Studies with a concentration in Classical Language and Literiture. 
+### I am Hanzhao Kuang, otherwise known as Grant or Kangaroo. I am currently an undergraduate at University of Pennsylvania major in Classical Studies with a concentration in Classical Language and Literiture. 
 
 ### Past Education Experience: 
 
