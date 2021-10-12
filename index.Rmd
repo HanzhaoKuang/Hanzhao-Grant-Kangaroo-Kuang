@@ -19,25 +19,34 @@ output: html_document
 
 # **Hanzhao(Grant/Kangaroo) Kuang**
 
-This is a template example for lab journaling. Students in Matt Crump's Human Cognition and Performance Lab will use this template to learn R, and other things. Students can replace this text with more fun things. People not in my lab can use this too.
+### I am Hanzhao Kuang, otherwise known as Grant or Kangaroo. I am currently an undergraduate at UPenn major in Classical Studies with a concentration in Classical Language and Literiture. 
 
-## How to use
+### Past Education Experience: 
 
-1. fork the repo for this website and follow instructions on read me to get set up. [https://github.com/CrumpLab/LabJournalWebsite](https://github.com/CrumpLab/LabJournalWebsite)
 
-2. Blog/journal what you are doing in R, by editing the Journal.Rmd. See the [Journal page](https://crumplab.github.io/LabJournalWebsite/Journal.html) for an example of what to do to get started learning R.
 
-3. See the [links page](https://crumplab.github.io/LabJournalWebsite/Links.html) for lots of helpful links on learning R.
+Georgetown Preparatory School,
+Class of 2020
 
-4. Change everything to make it your own.
 
+University of Pennsylvania,
+Class of 2024
 
 </div>
 <div class="col-sm-6">
 
-### [Crump Lab: Human Cognition and Performance](https://crumplab.github.io)
+## Current Positions:
 
-<a href = "https://crumplab.github.io">
-![](images/logo.png)
+##### [Residential Advisor, Ware College House](https://ware.house.upenn.edu/people)
+
+<a href = "https://ware.house.upenn.edu/people">
+
+
+
+##### [Latin Tranlation Contributor, Discentes](https://web.sas.upenn.edu/discentes/staff/)
+
+<a href = "https://web.sas.upenn.edu/discentes/staff/">
+![](images/Profile.jpeg)
 </a>
 </div>
+

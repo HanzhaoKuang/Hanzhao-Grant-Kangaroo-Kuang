@@ -1,11 +1,11 @@
-name: "MyLabJournal"
+name: "Hanzhao(Grant/Kangaroo) Kuang"
 navbar:
-  title: "MyLabJournal"
+  title: "Hanzhao(Grant/Kangaroo) Kuang"
   left:
     - text: "Home"
       href: index.html
-    - text: "Journal"
-      href: Journal.html
+    - text: "CRIM250 Assignment"
+      href: CRIM250-Assignment.html
     - text: "Links"
       href: Links.html
 output_dir: "docs"
