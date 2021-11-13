@@ -921,6 +921,401 @@ abline(h = 0, lty=&quot;dashed&quot;)</code></pre>
 <h3>Problem 3: Data ethics (10 points)</h3>
 <p>Describe the dataset. Considering our lecture on data ethics, what concerns do you have about the dataset? Once you perform your analysis to answer the question of interest using this dataset, what concerns might you have about the results?</p>
 <p>Answer: The dataset include Police Department Code, which can be used to track specific police department. Even if the code is not traceable for normal citizens, this is still sensitive information if people hacked into the system and decide to attack certain police departments with higher brutality incidents, which is a violation of confidentiality principle of data ethic. The results is also concerning since the data is collected by researchers with no further information given, which means it doesn’t provide enough transparency of how the data is collected, and there is a concern of fairness of whether there is biases given the data is clearly indicating a position.</p>
+<p>#ggplot Exercise</p>
+<p>##Install ggplot</p>
+<pre class="r"><code>#install.packages(&quot;tidyverse&quot;)#
+library(tidyverse)</code></pre>
+<p>###Exercise 3.2.4</p>
+<pre class="r"><code>ggplot(data = mpg)</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<ol style="list-style-type: decimal">
+<li>Run ggplot(data = mpg). What do you see?</li>
+</ol>
+<p>Answer: A blank sheet without dots.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>How many rows are in mpg? How many columns?</li>
+</ol>
+<pre class="r"><code>summary(mpg)</code></pre>
+<pre><code>##  manufacturer          model               displ            year     
+##  Length:234         Length:234         Min.   :1.600   Min.   :1999  
+##  Class :character   Class :character   1st Qu.:2.400   1st Qu.:1999  
+##  Mode  :character   Mode  :character   Median :3.300   Median :2004  
+##                                        Mean   :3.472   Mean   :2004  
+##                                        3rd Qu.:4.600   3rd Qu.:2008  
+##                                        Max.   :7.000   Max.   :2008  
+##       cyl           trans               drv                 cty       
+##  Min.   :4.000   Length:234         Length:234         Min.   : 9.00  
+##  1st Qu.:4.000   Class :character   Class :character   1st Qu.:14.00  
+##  Median :6.000   Mode  :character   Mode  :character   Median :17.00  
+##  Mean   :5.889                                         Mean   :16.86  
+##  3rd Qu.:8.000                                         3rd Qu.:19.00  
+##  Max.   :8.000                                         Max.   :35.00  
+##       hwy             fl               class          
+##  Min.   :12.00   Length:234         Length:234        
+##  1st Qu.:18.00   Class :character   Class :character  
+##  Median :24.00   Mode  :character   Mode  :character  
+##  Mean   :23.44                                        
+##  3rd Qu.:27.00                                        
+##  Max.   :44.00</code></pre>
+<p>Answer: 234 rows and 11 columns.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>What does the drv variable describe? Read the help for ?mpg to find out.</li>
+</ol>
+<pre class="r"><code>#Use ?mpg #</code></pre>
+<p>Answer: The type of drive train, where f = front-wheel drive, r = rear wheel drive, 4 = 4wd</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Make a scatterplot of hwy vs cyl.</li>
+</ol>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = hwy, y = cyl))</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<p>Answer: Plot is shown above.</p>
+<ol start="5" style="list-style-type: decimal">
+<li>What happens if you make a scatterplot of class vs drv? Why is the plot not useful?</li>
+</ol>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = class, y = cyl))</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p>Answer: Result is shown above. The scatterplot is not useful mainly because class is a categorical variable.</p>
+<p>###Exercise 3.3.1</p>
+<ol style="list-style-type: decimal">
+<li>What’s gone wrong with this code? Why are the points not blue?</li>
+</ol>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = &quot;blue&quot;))</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p>Answer: The paraphases is placed on the wrong position, it should be before the comma.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Which variables in mpg are categorical? Which variables are continuous? (Hint: type ?mpg to read the documentation for the dataset). How can you see this information when you run mpg?</li>
+</ol>
+<p>Answer: fl, drv, class, trans, model, manfucaturer are categorical. The rest is continous. Such information can be seen via ? of R.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Map a continuous variable to color, size, and shape. How do these aesthetics behave differently for categorical vs. continuous variables?</li>
+</ol>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = cyl))</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, size = cyl))</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-48-2.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, alpha = cyl))</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-48-3.png" width="672" /></p>
+<p>Answer: The color is plotted in a scale variation instead of discrete color categories. The shappe cannot be plotted for continous variable.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>What happens if you map the same variable to multiple aesthetics?</li>
+</ol>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = displ))</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-49-1.png" width="672" /> Answer: What will happen is shown above. The same variables behave in the same way.</p>
+<ol start="5" style="list-style-type: decimal">
+<li>What does the stroke aesthetic do? What shapes does it work with? (Hint: use ?geom_point)</li>
+</ol>
+<pre class="r"><code>#Use ?geom_point#
+vignette(&quot;ggplot2-specs&quot;)</code></pre>
+<p>Answer: Stroke aesthetic modify the width of the border. It work with circles.</p>
+<p>What happens if you map an aesthetic to something other than a variable name, like aes(colour = displ &lt; 5)? Note, you’ll also need to specify x and y.</p>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = displ &lt; 5))</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p>Answer: It will be shown as True/False value as shown above.</p>
+<p>###Exercise 3.5.1</p>
+<ol style="list-style-type: decimal">
+<li>What happens if you facet on a continuous variable?</li>
+</ol>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_wrap(~ cty, nrow = 2)</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<p>Answer: The data will make separate into many continuous parts.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>What do the empty cells in plot with facet_grid(drv ~ cyl) mean? How do they relate to this plot?</li>
+</ol>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = drv, y = cyl))</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p>Answer: The empty cells mean that there is no data for that cell. It is related to the plot above because the place where there are no dots on the plot above is where the empty cells occur.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>What plots does the following code make? What does . do?</li>
+</ol>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ .)</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(. ~ cyl)</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-54-2.png" width="672" /></p>
+<p>Answer: Facets. The . make disable one of the dimensions.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Take the first faceted plot in this section:</li>
+</ol>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_wrap(~ class, nrow = 2)</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = class))</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-55-2.png" width="672" /> What are the advantages to using faceting instead of the colour aesthetic? What are the disadvantages? How might the balance change if you had a larger dataset?</p>
+<p>Answer: Facet has advantage as it enable a complete and holistic comparison. The color aesthetic has the advantage of direct representation of the data. That is, the audience can understand color aesthetic easily. However, as the dataset gets larger, faceting become a better representation of the data.</p>
+<ol start="5" style="list-style-type: decimal">
+<li>Read ?facet_wrap. What does nrow do? What does ncol do? What other options control the layout of the individual panels? Why doesn’t facet_grid() have nrow and ncol arguments?</li>
+</ol>
+<pre class="r"><code>#?facet_wrap#</code></pre>
+<p>Answer: nrow and ncol set up the number of rows and columns. Scales also control the layout of the individual panels. The facet_grid() have no nrow and ncol because row and col in facet_grid() can be defined by formula, thus there should not be limitation for the numbers of rows and columns in facet_grid()</p>
+<ol start="6" style="list-style-type: decimal">
+<li>When using facet_grid() you should usually put the variable with more unique levels in the columns. Why?</li>
+</ol>
+<p>Answer: Because in that case the plot can be read easier by the audience.</p>
+<p>###Exercise 3.6.1</p>
+<ol style="list-style-type: decimal">
+<li>What geom would you use to draw a line chart? A boxplot? A histogram? An area chart?</li>
+</ol>
+<p>Answer: A line geom for a line chart, a box geom for a boxplot, a histogram geom for histogram, an area geom for area chart.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Run this code in your head and predict what the output will look like. Then, run the code in R and check your predictions.</li>
+</ol>
+<pre class="r"><code>ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) + 
+  geom_point() + 
+  geom_smooth(se = FALSE)</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<p>Answer: The output will plot hwy against displ, using drv as color aethestic, and the data are represented in points with smooth line.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>What does show.legend = FALSE do? What happens if you remove it? Why do you think I used it earlier in the chapter?</li>
+</ol>
+<p>Answer: Show. legend = FALSE remove legend of the plot. If it is removed, then legend of the plot will be shown. This is added to avoid the auto generated legends.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>What does the se argument to geom_smooth() do?</li>
+</ol>
+<pre class="r"><code>#?geom_smooth#</code></pre>
+<p>Answer: Se argument display confidence interval around smooth.</p>
+<ol start="5" style="list-style-type: decimal">
+<li>Will these two graphs look different? Why/why not?</li>
+</ol>
+<pre class="r"><code>ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  geom_smooth()</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-59-1.png" width="672" /></p>
+<pre class="r"><code>ggplot() + 
+  geom_point(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy))</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-59-2.png" width="672" /></p>
+<p>Answer: They look the same. They are the same because they put the same argument in the different places, which achieve the same result.</p>
+<ol start="6" style="list-style-type: decimal">
+<li>Recreate the R code necessary to generate the following graphs.</li>
+</ol>
+<pre class="r"><code>ggplot() + 
+  geom_point(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy))</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<pre class="r"><code>ggplot() + 
+  geom_point(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy, group = drv))</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-60-2.png" width="672" /></p>
+<pre class="r"><code>ggplot() + 
+  geom_point(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) + 
+  geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy, color = drv))</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-60-3.png" width="672" /></p>
+<pre class="r"><code>ggplot() + 
+  geom_point(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) + 
+  geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy))</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-60-4.png" width="672" /></p>
+<pre class="r"><code>ggplot() + 
+  geom_point(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) + 
+  geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy, group = drv))</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-60-5.png" width="672" /></p>
+<pre class="r"><code>ggplot() + 
+  geom_point(data = mpg, mapping = aes(x = displ, y = hwy, color = drv))</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-60-6.png" width="672" /></p>
+<p>Answer: See plot above.</p>
+<p>###Exercise 3.7.1</p>
+<ol style="list-style-type: decimal">
+<li>What is the default geom associated with stat_summary()? How could you rewrite the previous plot to use that geom function instead of the stat function?</li>
+</ol>
+<pre class="r"><code>#?stat_summary#</code></pre>
+<p>Answer: The default geom is pointrange. It can be rewritten via geom argument.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>What does geom_col() do? How is it different to geom_bar()?</li>
+</ol>
+<pre class="r"><code>#?geom_col#</code></pre>
+<p>Answer: geom_col() create bar chart. It is different from geom_bar() as geom_bar() makes the height of the bar proportional to the number of cases in each group, but geom_col() usesthe heights of the bars to represent values in the data.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Most geoms and stats come in pairs that are almost always used in concert. Read through the documentation and make a list of all the pairs. What do they have in common?</li>
+</ol>
+<p>Answer:The list can be found via typing geom_ and stat_. They serve the same function.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>What variables does stat_smooth() compute? What parameters control its behaviour?</li>
+</ol>
+<pre class="r"><code>#?stat_smooth#</code></pre>
+<p>Answer: It compute a line that aids the eye in seeing patterns in the presence of overplotting. The span, level, and n control its behavior.</p>
+<ol start="5" style="list-style-type: decimal">
+<li>In our proportion bar chart, we need to set group = 1. Why? In other words what is the problem with these two graphs?</li>
+</ol>
+<pre class="r"><code>ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, y = after_stat(prop)))</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = color, y = after_stat(prop)))</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-64-2.png" width="672" /></p>
+<p>Answer: We cannot observe any pattern due to the poor setup.</p>
+<p>###Exercise 3.8.1</p>
+<ol style="list-style-type: decimal">
+<li>What is the problem with this plot? How could you improve it?</li>
+</ol>
+<pre class="r"><code>ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
+  geom_point()</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+<p>Answer: The problem is overplotting. It can be improved through jitter in position.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>What parameters to geom_jitter() control the amount of jittering?</li>
+</ol>
+<pre class="r"><code>#?geom_jitter#</code></pre>
+<p>Answer: The parameter of the amount of jittering is width and height.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Compare and contrast geom_jitter() with geom_count().</li>
+</ol>
+<pre class="r"><code>#?geom_count#</code></pre>
+<p>Answer: Both geom deal with over plotting, but geom_count counts the number of observations at each location, then maps the count to point area, whereas geom_jitter add small random noise to the data.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>What’s the default position adjustment for geom_boxplot()? Create a visualisation of the mpg dataset that demonstrates it.</li>
+</ol>
+<pre class="r"><code>ggplot(data = mpg) + 
+  geom_boxplot(mapping = aes(x = displ, y = hwy))</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
+<p>Answer: As demonstrated, geom_box use dodge2 as default position.</p>
+<p>###Exercise 3.9.1</p>
+<ol style="list-style-type: decimal">
+<li>Turn a stacked bar chart into a pie chart using coord_polar().</li>
+</ol>
+<pre class="r"><code>bar &lt;- ggplot(data = mpg, aes(fill=class, y=drv, x=hwy)) + 
+    geom_bar(position=&quot;stack&quot;, stat=&quot;identity&quot;)
+bar + coord_polar()</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
+<p>Answer: See plot above</p>
+<ol start="2" style="list-style-type: decimal">
+<li>What does labs() do? Read the documentation.</li>
+</ol>
+<pre class="r"><code>#?labs#</code></pre>
+<p>Answer: It can modify plot labels.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>What’s the difference between coord_quickmap() and coord_map()?</li>
+</ol>
+<pre class="r"><code>#?coord_map#</code></pre>
+<p>Answer: Coord_map can set parameters but coord_quickmap cannot.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>What does the plot below tell you about the relationship between city and highway mpg? Why is coord_fixed() important? What does geom_abline() do?</li>
+</ol>
+<pre class="r"><code>ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
+  geom_point() + 
+  geom_abline() +
+  coord_fixed()</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+<p>Answer: The relationship between highway and city is linear. Coord_fixed is important beacause it force a sepcific ration into the plot. Geom_abline() compute the line.</p>
+</div>
+<div id="exercise-28.2.1" class="section level3">
+<h3>Exercise 28.2.1</h3>
+<ol style="list-style-type: decimal">
+<li>Create one plot on the fuel economy data with customised title, subtitle, caption, x, y, and colour labels.</li>
+</ol>
+<pre class="r"><code>ggplot(mpg, aes(fl, hwy)) +
+  geom_point(aes(colour = class)) +
+  geom_smooth(se = FALSE) +
+  labs(
+    x = &quot;FUEL TYPE (mpg)&quot;,
+    y = &quot;Highway fuel economy (mpg)&quot;,
+    colour = &quot;Car type&quot;)</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+<p>Answer: See plot above.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>The geom_smooth() is somewhat misleading because the hwy for large engines is skewed upwards due to the inclusion of lightweight sports cars with big engines. Use your modelling tools to fit and display a better model.</li>
+</ol>
+<pre class="r"><code>ggplot(mpg, aes(displ, hwy), position = &quot;identity&quot;) +
+  geom_point(aes(colour = class)) +
+  geom_smooth(se = FALSE) +
+  labs(
+    x = &quot;Engine displacement (L)&quot;,
+    y = &quot;Highway fuel economy (mpg)&quot;,
+    colour = &quot;Car type&quot;)</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-74-1.png" width="672" /> Answer: Plot see above.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Take an exploratory graphic that you’ve created in the last month, and add informative titles to make it easier for others to understand.</li>
+</ol>
+<pre class="r"><code>bar &lt;- ggplot(data = mpg, aes(fill=class, y=drv, x=hwy)) + 
+    geom_bar(position=&quot;stack&quot;, stat=&quot;identity&quot;)
+bar + coord_polar() +
+labs(
+  x = &quot;the type of drive train&quot;,
+  y = &quot;highway miles per gallon&quot;)</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
+<p>Answer: Plot see above.</p>
+</div>
+<div id="exercise-28.3.1" class="section level3">
+<h3>Exercise 28.3.1</h3>
+<ol style="list-style-type: decimal">
+<li>Use geom_text() with infinite positions to place text at the four corners of the plot.</li>
+</ol>
+<pre class="r"><code>label &lt;- tibble(
+  displ = Inf,
+  hwy = Inf,
+  label = &quot;I.&quot;
+)
+
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
+  geom_text(aes(label = label), data = label, vjust = &quot;top&quot;, hjust = &quot;right&quot;) + 
+  geom_text(aes(label = label), data = label, vjust = &quot;top&quot;, hjust = &quot;left&quot;) +
+  geom_text(aes(label = label), data = label, vjust = &quot;bottom&quot;, hjust = &quot;left&quot;) +
+   geom_text(aes(label = label), data = label, vjust = &quot;bottom&quot;, hjust = &quot;right&quot;)</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
+<p>Answer: See plot above.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Read the documentation for annotate(). How can you use it to add a text label to a plot without having to create a tibble?</li>
+</ol>
+<pre class="r"><code>#?annotate()#</code></pre>
+<p>Answer: That can be done by specifying the limits of x and y</p>
+<ol start="3" style="list-style-type: decimal">
+<li>How do labels with geom_text() interact with faceting? How can you add a label to a single facet? How can you put a different label in each facet? (Hint: think about the underlying data.)</li>
+</ol>
+<p>Answer: That can be achieved by the well defined x and y coordinates.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>What arguments to geom_label() control the appearance of the background box?</li>
+</ol>
+<pre class="r"><code>#?geom_label#</code></pre>
+<p>Answer: inherit.aes</p>
+<ol start="5" style="list-style-type: decimal">
+<li>What are the four arguments to arrow()? How do they work? Create a series of plots that demonstrate the most important options.</li>
+</ol>
+<pre class="r"><code>#?arrow()#</code></pre>
+<p>Answer: Arrow() seems to be not working.</p>
+</div>
+<div id="exercise-28.4.4" class="section level3">
+<h3>Exercise 28.4.4</h3>
+<ol style="list-style-type: decimal">
+<li>Why doesn’t the following code override the default scale?</li>
+</ol>
+<pre class="r"><code>#ggplot(df, aes(x, y)) +#
+  #geom_hex() +#
+  #scale_colour_gradient(low = &quot;white&quot;, high = &quot;red&quot;) +#
+  #coord_fixed()#</code></pre>
+<p>Answer: Fail to answer due to code error</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>What is the first argument to every scale? How does it compare to labs()?</p></li>
+<li><p>Change the display of the presidential terms by:</p></li>
+</ol>
+<pre><code>
+Combining the two variants shown above.
+Improving the display of the y axis.
+Labelling each term with the name of the president.
+Adding informative plot labels.
+Placing breaks every 4 years (this is trickier than it seems!).
+
+4. Use override.aes to make the legend on the following plot easier to see.
+
+
+```r
+ggplot(diamonds, aes(carat, price)) +
+  geom_point(aes(colour = cut), alpha = 1/20)</code></pre>
+<p><img src="CRIM250-Assignment_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
 <p><span class="math display">\[\\[2in]\]</span></p>
 </div>
 </div>
