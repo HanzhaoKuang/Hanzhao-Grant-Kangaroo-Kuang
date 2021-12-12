@@ -1,6 +1,13 @@
 ---
 title: "Crim250 Final Project"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 1
+    #code_folding: hide
 ---
 
 # "North Vs. South: A case study of firearms usage in homocide" # 
