@@ -7,5 +7,5 @@ navbar:
     - text: "CRIM250 Assignment"
       href: CRIM250-Assignment.html
     - text: "Crim250 Final Project"
-      href: Crim250-Final-Project.html
+      href: Crim250 Final Project.html
 output_dir: "docs"
