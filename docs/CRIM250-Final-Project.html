@@ -343,8 +343,8 @@ div.tocify {
 </div>
 
 
-<div id="north-vs.-south-a-case-study-of-firearms-usage-in-homocides." class="section level1">
-<h1>“North Vs. South: A case study of firearms usage in homocides.”</h1>
+<div id="north-vs.-south-a-case-study-of-firearms-usage-in-homocides." class="section level2">
+<h2>“North Vs. South: A case study of firearms usage in homocides.”</h2>
 <p><strong>Hanzhao Kuang</strong></p>
 <p><strong>Collaboration with Eliza Epstein, Carolina Herrera Figueroa, Carmen Harrison Montoya</strong></p>
 <p><strong>December 5, 2021</strong></p>
@@ -357,7 +357,7 @@ div.tocify {
 <p>That said, after extensive efforts to make the question work, it was ultimately decided that we should work with a new data set. In exploring themes under the same overarching idea of imbalances in homicide rates, we elected to focus on weapons used by state. While it is known that citizens in the south are more likely to own firearms, the question we wanted to study was whether there was a significant difference in weapon type used in homicides in Northern vs Southern states.</p>
 <p>The motivation for this data analysis stemmed from the ongoing issues regarding gun homicides in the US. While access to guns is a federal issue, each state has their own laws regarding firearms. In 2019 there were a total of 39, 707 total deaths from firearms in the US. Further, in 2018 firearms were responsible for about 75% of homicides in the US. It has been estimated that about 31% of households in the US possess firearms and about 22% of adults own at least one firearm. The hypothesis for our study was that southern states will have significantly higher rates of firearms used in homicides. The null hypothesis is therefore that there will be no difference between northern and southern states in levels of firearms used in homicides.</p>
 <p>The dataset used to analyze this question is part of the FBI’s Uniform Crime Report of 2019, for which law enforcement agencies throughout the United States provide summary reports on Part I offenses (which include criminal homicide, arson and assault) . This is voluntary and counties are not obligated to send any reports to the FBI. This survey covers 93% of the population, and only reports on crimes that are known to the police. The team specifically focused on Table 20 of the report, which looks at murder by state and types of weapons. It is important to note that Alabama and Florida are excluded from our analysis because the data for these was extremely limited.</p>
-<p>We decided to create maps based on the weapons used in homicides for each state. These maps simply show the number of a certain type of weapon used in every state. For example, the map below shows the number of handgunds that were used in homicides in each state. On the map, California is depicted with the lightest shade of blue, indicating a very high number of handguns used in homicides relative to other states. <img src="CRIM250-Final-Project_files/figure-html/unnamed-chunk-2-1.png" width="720" /></p>
+<p>We decided to create maps based on the weapons used in homicides for each state. These maps simply show the number of a certain type of weapon used in every state. For example, the map below shows the number of handguns that were used in homicides in each state. On the map, California is depicted with the lightest shade of blue, indicating a very high number of handguns used in homicides relative to other states. <img src="CRIM250-Final-Project_files/figure-html/unnamed-chunk-2-1.png" width="720" /></p>
 <p>The map below shows the number of rifles used in homicides in each state.</p>
 <p><img src="CRIM250-Final-Project_files/figure-html/unnamed-chunk-3-1.png" width="720" /></p>
 <p>This map (below) instead shows the number of shotguns used in homicides. For this specific type of weapon we can see that California and Texas are very similar.</p>
@@ -387,7 +387,7 @@ div.tocify {
 ## Multiple R-squared:  0.138,  Adjusted R-squared:  0.1197 
 ## F-statistic: 7.524 on 1 and 47 DF,  p-value: 0.008588</code></pre>
 <p>Beyond this, we conducted a regression analysis to further solidify our hypothesis, show that the four assumptions are satisfied to reject the null hypothesis, and reinforce our analysis by taking into account our missing data and the inequality in the number of north and south states.</p>
-<p>Before our assumptions, the goodness of fit of our graph is satisfied through our Residuals vs. X line (with Washington DC as the lower outlier) and Residuals vs. Fitted (with DC again as outlier).</p>
+<p>Before our assumptions, the goodness of fit of our graph is satisfied through our Residuals vs. X line (with Hawaii as the lower outlier) and Residuals vs. Fitted (with Hawaii again as outlier). Note that the three points that are labeled are Hawaii(10), Illinois(12), South Dakota(41).</p>
 <p><img src="CRIM250-Final-Project_files/figure-html/unnamed-chunk-9-1.png" width="672" /> <img src="CRIM250-Final-Project_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>The assumption of independence between observations is also satisfied as shown by the Residuals vs X plot. We can also assume that simply because a state is located in the North or South that it will automatically have a lower/higher use of firearms in homicides.</p>
 <p>The assumption of homoscedasticity is satisfied through our Scale-Location Plot, despite a slight skew downwards as the fitted values grow larger.</p>

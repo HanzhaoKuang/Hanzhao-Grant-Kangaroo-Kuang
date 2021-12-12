@@ -14,7 +14,7 @@ output:
 knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 ```
 
-# "North Vs. South: A case study of firearms usage in homocides." #
+## "North Vs. South: A case study of firearms usage in homocides." ##
 
 **Hanzhao Kuang**
 
@@ -68,7 +68,7 @@ dat.weapon <- table_20
 ```
 
 
-We decided to create maps based on the weapons used in homicides for each state. These maps simply show the number of a certain type of weapon used in every state. For example, the map below shows the number of handgunds that were used in homicides in each state. On the map, California is depicted with the lightest shade of blue, indicating a very high number of handguns used in homicides relative to other states.
+We decided to create maps based on the weapons used in homicides for each state. These maps simply show the number of a certain type of weapon used in every state. For example, the map below shows the number of handguns that were used in homicides in each state. On the map, California is depicted with the lightest shade of blue, indicating a very high number of handguns used in homicides relative to other states.
 ```{r, eval = TRUE, fig.width = 7.5, fig.height = 4, echo=FALSE}
 library('maps') 
 library('ggplot2') 
@@ -170,7 +170,7 @@ summary(weapon.lm)
 Beyond this, we conducted a regression analysis to further solidify our hypothesis, show that the four assumptions are satisfied to reject the null hypothesis, and reinforce our analysis by taking into account our missing data and the inequality in the number of north and south states. 
 
 
-Before our assumptions, the goodness of fit of our graph is satisfied through our Residuals vs. X line (with Washington DC as the lower outlier) and Residuals vs. Fitted (with DC again as outlier).
+Before our assumptions, the goodness of fit of our graph is satisfied through our Residuals vs. X line (with Hawaii as the lower outlier) and Residuals vs. Fitted (with Hawaii again as outlier). Note that the three points that are labeled are Hawaii(10), Illinois(12), South Dakota(41). 
 
 
 
@@ -238,5 +238,6 @@ Returning to our initial hypothesis, issues in data analysis rendered us incapab
 
 
 Now, beyond the outcomes of the data analysis, this project taught us valuable lessons about the research process. Oftentimes researchers have questions that they are motivated to answer yet the data is either unavailable or cannot be readily used. This project leads to the motivation of future research. With more time and resources, it would be interesting to delve into the original research question. Further, it could be thought provoking to combine the two questions and analyze if there are gender differences in the weapons used for homicides in the US. 
+
 
 $$\\[2in]$$
