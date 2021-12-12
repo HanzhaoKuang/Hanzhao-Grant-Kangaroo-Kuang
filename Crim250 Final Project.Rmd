@@ -240,3 +240,4 @@ Returning to our initial hypothesis, issues in data analysis rendered us incapab
 Now, beyond the outcomes of the data analysis, this project taught us valuable lessons about the research process. Oftentimes researchers have questions that they are motivated to answer yet the data is either unavailable or cannot be readily used. This project leads to the motivation of future research. With more time and resources, it would be interesting to delve into the original research question. Further, it could be thought provoking to combine the two questions and analyze if there are gender differences in the weapons used for homicides in the US. 
 
 
+$$\\[2in]$$
